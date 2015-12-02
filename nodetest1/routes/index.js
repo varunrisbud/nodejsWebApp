@@ -24,9 +24,18 @@ router.get('/ipaddr', function(req, res, next) {
 router.get('/list', function(req, res) {
     var db = req.db;
     var collection = db.get('furniture');
-    collection.find({},{},function(e,docs){
-        res.json({documents: docs});
-    });
+    var nameToFind = req.query.name;
+    if(typeof nameToFind != 'undefined') {
+    	var nameToFind = req.query.name;
+    	collection.find({name: nameToFind },{},function(e,docs){
+        	res.json({documents: docs});
+    	});
+    }
+    else {
+    	collection.find({},{},function(e,docs){
+        	res.json({documents: docs});
+    	});
+    }
 });
 
 router.get('/list1', function(req, res) {
