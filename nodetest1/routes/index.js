@@ -32,19 +32,10 @@ router.get('/list', function(req, res) {
     	});
     }
     else {
-    	collection.find({},{},function(e,docs){
+    	collection.findOne({},function(e,docs){
         	res.json({documents: docs});
     	});
     }
-});
-
-router.get('/list1', function(req, res) {
-    var db = req.db;
-    var collection = db.get('furniture');
-    var nameToFind = req.param('name');
-    collection.find({name: nameToFind },{},function(e,docs){
-        res.json({documents: docs});
-    });
 });
 
 module.exports = router;
